@@ -7,24 +7,150 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;700&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>BestSong</title>
     <style>
         body{
             background: rgb(2,0,36);
             background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,89,1) 35%, rgba(1,2,14,1) 100%);
             box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
             font-family: 'Wix Madefor Display', sans-serif;
+            justify-content: center;
             margin: 0;
-            padding: 0
+            padding: 0;
+            width:99vw;
         }
         h1{
+            color: rgba(255, 255, 255, 0.774);
+            font-size: 50px;
+            text-align: center;
+            width: 100%;
+            
+        }
+        main{
+            align-items: center;
+            background: none;
+            display: flex;
+            justify-content: center;
+            height: 60vh;
+            width: 50%;
+
+        }
+        main button{
+            background-color: red;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
             color: white;
+            font-size: 30px;
+            font-weight: 700;
+            height: 15%;
+            width: 15%;
+
+        }
+        main button:hover{
+            background-color: green;
+
+        }
+        aside{
+            align-items: flex-start;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 50%;
+        }
+        aside h2{
+            color: green;
+            font-size: 45px;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+        }
+        aside ol{
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        aside ol>li{
+            color: rgba(255, 255, 255, 0.808);
+            font-size: 25px;
+            
+            margin-top: 5%;
         }
     </style>
+   
 </head>
 
 <body>
     <h1>Best of Sentino</h1>
+    <main>
+        <a href="/game"><button action>START</button></a>  
+       
+    </main>
+    <aside>
+        
+        <ol id="ranking">
+            <h2>Ranking</h2>
+            {% for song in songs %}
+        <li><span class="title">{{song.title}}</span> : <span class="score">{{song.points}}</span> </li>
+            {% endfor %}
+        </ol>
+    </aside>
     
+<script>
+    const sortRanking=()=>{
+        const scores = document.querySelectorAll('.score')
+        const titles = document.querySelectorAll('.title')
+        const ol = document.querySelector('ol')
+        const array = []
+        const numberArray = []
+        const newArray = []
+        
+        for (let index = 0; index < scores.length; index++) {
+            array.push({
+                title: titles[index].textContent,
+                points: scores[index].textContent
+            })
+        }
+        for (let index = 0; index < array.length; index++) {
+            numberArray.push(parseInt(array[index].points))
+            
+        }
+        function comparator(a, b) {
+            return b - a;
+        }
+        numberArray.sort(comparator)
+        for (let index = 0; index < array.length; index++) {
+            current = numberArray[index]
+            for (let i = 0; i < array.length; i++) {
+                if (newArray.length === array.length) break
+                if (current ===parseInt(array[i].points)){
+                    newArray.push({
+                        title: array[i].title,
+                        points: array[i].points
+                    })
+                }
+                
+            }
+            
+        }
+        const newRanking=()=>{
+            
+            for (let index = 0; index < newArray.length; index++) {
+                scores[index].textContent=newArray[index].points
+                titles[index].textContent=newArray[index].title
+
+                
+            }
+        }
+        newRanking()
+    }
+    sortRanking()
+    
+    
+</script>    
 </body>
+
 </html>

@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from .models import Song
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    songs = Song.objects.all()
+    return render(request, 'index.html', {'songs':songs})
+
+def game(request):
+    return render(request,'game.html')
