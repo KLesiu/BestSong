@@ -52,6 +52,7 @@
 </style>
 <body>
     <h1>Best of Sentino</h1>
+   
 <main>
    <div id="firstOption"></div>
    <div id="secondOption"></div>
@@ -224,19 +225,21 @@
         secondOption.classList.add("hidden")
         firstButton.classList.add('hidden')
         secondButton.classList.add('hidden')
-        const h2Winner = document.createElement('h2')
-        h2Winner.textContent = `1. ${winner}  -- + 5 points`
-        const h3Second = document.createElement('h3')
-        h3Second.textContent= `2. ${second}  -- + 2 points`
-        const confirm = document.createElement('a')
-        const confirmButton = document.createElement('button')
-        confirm.href = '../'
-        confirmButton.textContent= "CONFIRM"
-        confirm.appendChild(confirmButton)
+        
+
+       
+        const form = document.createElement('form')
+        form.method="POST"
+        form.action="give_points"
+      
+        form.innerHTML= `
+        {% csrf_token %}
+        <input name="winner_game" id="winner_game" value='${winner}'>
+        <input name="second_game" id="second_game" value='${second}'>
+        <input type="submit" value="CONFIRM"></input> `
+      
         const main = document.querySelector('main')
-        main.appendChild(h2Winner)
-        main.appendChild(h3Second)
-        main.appendChild(confirm)
+        main.appendChild(form)
     }
     const get_choice=(e)=>{
 

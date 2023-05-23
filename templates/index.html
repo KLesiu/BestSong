@@ -98,60 +98,21 @@
         <ol id="ranking">
             <h2>Ranking</h2>
             {% for song in songs %}
+          
         <li><span class="title">{{song.title}}</span> : <span class="score">{{song.points}}</span> </li>
-            {% endfor %}
+          {% endfor %}
         </ol>
     </aside>
     
 <script>
-    const sortRanking=()=>{
-        const scores = document.querySelectorAll('.score')
-        const titles = document.querySelectorAll('.title')
-        const ol = document.querySelector('ol')
-        const array = []
-        const numberArray = []
-        const newArray = []
-        
-        for (let index = 0; index < scores.length; index++) {
-            array.push({
-                title: titles[index].textContent,
-                points: scores[index].textContent
-            })
-        }
-        for (let index = 0; index < array.length; index++) {
-            numberArray.push(parseInt(array[index].points))
-            
-        }
-        function comparator(a, b) {
-            return b - a;
-        }
-        numberArray.sort(comparator)
-        for (let index = 0; index < array.length; index++) {
-            current = numberArray[index]
-            for (let i = 0; i < array.length; i++) {
-                if (newArray.length === array.length) break
-                if (current ===parseInt(array[i].points)){
-                    newArray.push({
-                        title: array[i].title,
-                        points: array[i].points
-                    })
-                }
-                
-            }
-            
-        }
-        const newRanking=()=>{
-            
-            for (let index = 0; index < newArray.length; index++) {
-                scores[index].textContent=newArray[index].points
-                titles[index].textContent=newArray[index].title
-
-                
-            }
-        }
-        newRanking()
-    }
-    sortRanking()
+    const scores = document.querySelectorAll('.score')
+    let scoresArray = []
+    for (let index = 0; index < scores.length; index++) scoresArray.push(parseInt(scores[index].textContent))
+    scoresArray.sort(function(a, b){return b-a})
+    console.log(scores)
+    
+    
+    
     
     
 </script>    
