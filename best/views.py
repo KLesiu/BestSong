@@ -7,4 +7,5 @@ def index(request):
     return render(request, 'index.html', {'songs':songs})
 
 def game(request):
-    return render(request,'game.html')
+    songs = Song.objects.all()
+    return render(request,'game.html', {'songs':songs})
