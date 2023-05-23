@@ -161,7 +161,7 @@
             if(round % 2 === 0){
             
             NumberOfSongs = currentSongsSecond.length
-            console.log(NumberOfSongs)
+            
             len = currentSongsSecond.length
             const optionOne = Math.floor(Math.random() * len)
             let optionTwo = Math.floor(Math.random() * len)
@@ -221,8 +221,8 @@
         
     }
     const show_winner=(winner, second)=>{
-        firstOption.classList.add("hidden")
-        secondOption.classList.add("hidden")
+        firstOption.innerHTML=""
+        secondOption.innerHTML=""
         firstButton.classList.add('hidden')
         secondButton.classList.add('hidden')
         
@@ -256,13 +256,15 @@
                  }else{
                     result = secondDiv.innerHTML
                 }
+                
                 if(result.toString() === currentSongsSecond[0].html){
                         return show_winner(currentSongsSecond[0].title,currentSongsSecond[1].title) 
                     }else if(result.toString() === currentSongsSecond[1].html){
                         return show_winner(currentSongsSecond[1].title,currentSongsSecond[0].title) 
                     }
                 
-            }else{
+            }
+            else{
                 let result;
                 if(e.target.textContent==='Option 1'){
                     result = firstDiv.innerHTML
@@ -281,7 +283,7 @@
         
         const result = e.target.textContent
         if(result === 'Option 1'){
-            console.log(`${fightingSongs[0].title} won`)
+           
             if(round ===0 || round%2===0){
           
                 currentSongs.push(fightingSongs[0])
@@ -293,7 +295,7 @@
             
         }
         else{
-            console.log(`${fightingSongs[1].title} won`)
+     
             if(round ===0 || round%2===0){
                
 
