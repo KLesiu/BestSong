@@ -86,7 +86,7 @@
     const fightingSongs = []
     const currentSongs = []
     const currentSongsSecond = []
-    const winnersArray = []
+    
     let round = 0
     let numberOfRounds = 0
     for (let index = 0; index < videos.length; index++) {
@@ -219,6 +219,25 @@
         
         
     }
+    const show_winner=(winner, second)=>{
+        firstOption.classList.add("hidden")
+        secondOption.classList.add("hidden")
+        firstButton.classList.add('hidden')
+        secondButton.classList.add('hidden')
+        const h2Winner = document.createElement('h2')
+        h2Winner.textContent = `1. ${winner}  -- + 5 points`
+        const h3Second = document.createElement('h3')
+        h3Second.textContent= `2. ${second}  -- + 2 points`
+        const confirm = document.createElement('a')
+        const confirmButton = document.createElement('button')
+        confirm.href = '../'
+        confirmButton.textContent= "CONFIRM"
+        confirm.appendChild(confirmButton)
+        const main = document.querySelector('main')
+        main.appendChild(h2Winner)
+        main.appendChild(h3Second)
+        main.appendChild(confirm)
+    }
     const get_choice=(e)=>{
 
         NumberOfSongs-=2
@@ -235,9 +254,9 @@
                     result = secondDiv.innerHTML
                 }
                 if(result.toString() === currentSongsSecond[0].html){
-                        return console.log(`The winner is ${currentSongsSecond[0].title}`)
+                        return show_winner(currentSongsSecond[0].title,currentSongsSecond[1].title) 
                     }else if(result.toString() === currentSongsSecond[1].html){
-                        return console.log(`The winner is ${currentSongsSecond[1].title}`)
+                        return show_winner(currentSongsSecond[1].title,currentSongsSecond[0].title) 
                     }
                 
             }else{
@@ -248,9 +267,9 @@
                     result = secondDiv.innerHTML
                 }
                 if(result.toString() === currentSongs[0].html){
-                        return console.log(`The winner is ${currentSongs[0].title}`)
+                        return show_winner(currentSongs[0].title, currentSongs[1].title)
                     }else if(result.toString() === currentSongs[1].html){
-                        return console.log(`The winner is ${currentSongs[1].title}`)
+                        return show_winner(currentSongs[1].title, currentSongs[0].title)
                     } 
 
             }
