@@ -1,327 +1,340 @@
 <style>
-       body{
-            background: rgb(2,0,36);
-            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,89,1) 35%, rgba(1,2,14,1) 100%);
-            box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            font-family: 'Wix Madefor Display', sans-serif;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-            width:99vw;
-        }
-        h1{
-            color: rgba(255, 255, 255, 0.774);
-            font-size: 50px;
-            text-align: center;
-            width: 100%;
-            
-            
-        }
-        main{
-            display: flex;
-            height: 60vh;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-        }
-        button{
-            background-color: rgba(255, 255, 255, 0.562);
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 40px;
-            font-weight: 700;
-            height: 15%;
-            width: 20%;
-        }
-        button:hover{
-            background-color: white;
-        }
-        main div{
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            width: 50%;
-        }
-        .hidden{
-            display: none;
-        }
+    body{
+         background: rgb(2,0,36);
+         background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,89,1) 35%, rgba(1,2,14,1) 100%);
+         box-sizing: border-box;
+         display: flex;
+         flex-wrap: wrap;
+         font-family: 'Wix Madefor Display', sans-serif;
+         justify-content: center;
+         margin: 0;
+         padding: 0;
+         width:99vw;
+     }
+     h1{
+         color: rgba(255, 255, 255, 0.774);
+         font-size: 50px;
+         text-align: center;
+         width: 100%;
+         
+         
+     }
+     main{
+         display: flex;
+         height: 60vh;
+         flex-wrap: wrap;
+         justify-content: space-around;
+         margin-left: auto;
+         margin-right: auto;
+         width: 80%;
+     }
+     button{
+         background-color: rgba(255, 255, 255, 0.562);
+         border-radius: 10px;
+         cursor: pointer;
+         font-size: 40px;
+         font-weight: 700;
+         height: 15%;
+         width: 20%;
+     }
+     button:hover{
+         background-color: white;
+     }
+     main div{
+         align-items: center;
+         display: flex;
+         justify-content: center;
+         width: 50%;
+     }
+     .hidden{
+         display: none;
+     }
 </style>
 <body>
-    <h1>Best of Sentino</h1>
-   
+ <h1>Best of Sentino</h1>
+
 <main>
-   <div id="firstOption"></div>
-   <div id="secondOption"></div>
-   <button id="firstButton">Option 1</button>
-   <button id="secondButton">Option 2</button>
-    
-   
+<div id="firstOption"></div>
+<div id="secondOption"></div>
+<button id="firstButton">Option 1</button>
+<button id="secondButton">Option 2</button>
+ 
+
 </main>
 {% for song in songs %}
 <div class="hidden">
-    <span class="videos">{{song.html_link}} </span>
-    <span class="title">{{song.title}}</span>
-    <span class="points">{{song.points}}</span>
-    
+ <span class="videos">{{song.html_link}} </span>
+ <span class="title">{{song.title}}</span>
+ <span class="points">{{song.points}}</span>
+ 
 </div>
 {% endfor %}
 <script>
-    const videos = document.querySelectorAll('.videos')
-    const firstDiv = document.querySelector('#firstOption')
-    const secondDiv = document.querySelector("#secondOption")
-    const titles = document.querySelectorAll('.title')
-    const points = document.querySelectorAll('.points')
-    const firstOption = document.querySelector('#firstOption')
-    const secondOption = document.querySelector('#secondOption')
-    const firstButton = document.querySelector("#firstButton")
-    const secondButton = document.querySelector("#secondButton")
+ const videos = document.querySelectorAll('.videos')
+ const firstDiv = document.querySelector('#firstOption')
+ const secondDiv = document.querySelector("#secondOption")
+ const titles = document.querySelectorAll('.title')
+ const points = document.querySelectorAll('.points')
+ const firstOption = document.querySelector('#firstOption')
+ const secondOption = document.querySelector('#secondOption')
+ const firstButton = document.querySelector("#firstButton")
+ const secondButton = document.querySelector("#secondButton")
+ 
+
+ const allSongs = []
+ const videosArray = []
+ let NumberOfSongs = 0
+ const fightingSongs = []
+ const currentSongs = []
+ const currentSongsSecond = []
+ 
+ let round = 0
+ let numberOfRounds = 0
+ for (let index = 0; index < videos.length; index++) {
+     allSongs.push({
+         html: videos[index].textContent,
+         title: titles[index].textContent,
+         points: 0
+     })
+     videosArray.push(videos[index].textContent)
+     
+ }
+ 
+ const start_game=()=>{
+     const len = allSongs.length
+     numberOfRounds = allSongs.length
+     NumberOfSongs = len
+     const optionOne = Math.floor(Math.random() * len)
+     let optionTwo = Math.floor(Math.random() * len)
+     while (optionOne === optionTwo){
+         optionTwo = Math.floor(Math.random() * len)
+     }
+     firstDiv.innerHTML = videos[optionOne].textContent
+     secondDiv.innerHTML = videos[optionTwo].textContent
+     fightingSongs.push(allSongs[optionOne])
+     fightingSongs.push(allSongs[optionTwo])
+     allSongs.splice(optionOne,1)
+     if (optionOne > optionTwo){
+         allSongs.splice(optionTwo,1)
+     }
+     else{
+         allSongs.splice(optionTwo-1,1)
+     }
+     
+     
     
 
-    const allSongs = []
-    const videosArray = []
-    let NumberOfSongs = 0
-    const fightingSongs = []
-    const currentSongs = []
-    const currentSongsSecond = []
+ }
+ const fight=()=>{
+     let len;
     
-    let round = 0
-    let numberOfRounds = 0
-    for (let index = 0; index < videos.length; index++) {
-        allSongs.push({
-            html: videos[index].textContent,
-            title: titles[index].textContent,
-            points: 0
-        })
-        videosArray.push(videos[index].textContent)
+     if(round===0){
         
-    }
-    
-    const start_game=()=>{
-        const len = allSongs.length
-        numberOfRounds = allSongs.length
-        NumberOfSongs = len
-        const optionOne = Math.floor(Math.random() * len)
-        let optionTwo = Math.floor(Math.random() * len)
-        while (optionOne === optionTwo){
+         len=allSongs.length
+        
+         let optionOne;
+         let optionTwo;
+         if(len===2){
+             optionOne = 0
+             optionTwo = 1
+         }else{
+             optionOne = Math.floor(Math.random() * len)
+             optionTwo = Math.floor(Math.random() * len)
+         while (optionOne === optionTwo ){
+             optionTwo = Math.floor(Math.random() * len)
+         }
+         }
+         
+         firstDiv.innerHTML = videos[videosArray.indexOf(allSongs[optionOne].html)].textContent
+         secondDiv.innerHTML = videos[videosArray.indexOf(allSongs[optionTwo].html)].textContent
+         fightingSongs.push(allSongs[optionOne])
+         fightingSongs.push(allSongs[optionTwo])
+         allSongs.splice(optionOne,1)
+         if (optionOne > optionTwo){
+             allSongs.splice(optionTwo,1)
+         }
+         else{
+             allSongs.splice(optionTwo-1,1)
+         }
+     }
+     else if(round > 0){
+         if(round % 2 === 0){
+         
+         NumberOfSongs = currentSongsSecond.length
+         
+         len = currentSongsSecond.length
+         if(len===2){
+             optionOne = 0
+             optionTwo = 1
+         }else{
+             optionOne = Math.floor(Math.random() * len)
+             optionTwo = Math.floor(Math.random() * len)
+         while (optionOne === optionTwo ){
+             optionTwo = Math.floor(Math.random() * len)
+         }
+         }
+         firstDiv.innerHTML = videos[videosArray.indexOf(currentSongsSecond[optionOne].html)].textContent
+         secondDiv.innerHTML = videos[videosArray.indexOf(currentSongsSecond[optionTwo].html)].textContent
+         fightingSongs.push(currentSongsSecond[optionOne])
+         fightingSongs.push(currentSongsSecond[optionTwo])
+         if(currentSongsSecond.length!==2){
+             currentSongsSecond.splice(optionOne,1)
+         if (optionOne > optionTwo){
+             currentSongsSecond.splice(optionTwo,1)
+         }
+         else{
+             currentSongsSecond.splice(optionTwo-1,1)
+         }  
+         }
+         }
+         
+         else{
+         NumberOfSongs = currentSongs.length
+         len = currentSongs.length
+         let optionOne;
+         let optionTwo;
+         if(len===2){
+             optionOne = 0
+             optionTwo = 1
+         }else{
+             optionOne = Math.floor(Math.random() * len)
+             optionTwo = Math.floor(Math.random() * len)
+             if(len >= 2){
+                while (optionOne === optionTwo ){
+                
             optionTwo = Math.floor(Math.random() * len)
         }
-        firstDiv.innerHTML = videos[optionOne].textContent
-        secondDiv.innerHTML = videos[optionTwo].textContent
-        fightingSongs.push(allSongs[optionOne])
-        fightingSongs.push(allSongs[optionTwo])
-        allSongs.splice(optionOne,1)
-        if (optionOne > optionTwo){
-            allSongs.splice(optionTwo,1)
-        }
-        else{
-            allSongs.splice(optionTwo-1,1)
-        }
+             }
         
+         }
+         console.log(optionOne)
+         console.log(optionTwo)
+         firstDiv.innerHTML = videos[videosArray.indexOf(currentSongs[optionOne].html)].textContent
+         secondDiv.innerHTML = videos[videosArray.indexOf(currentSongs[optionTwo].html)].textContent
+         fightingSongs.push(currentSongs[optionOne])
+         fightingSongs.push(currentSongs[optionTwo])
+         currentSongs.splice(optionOne,1)
+         if (optionOne > optionTwo){
+             currentSongs.splice(optionTwo,1)
+         }
+         else{
+             currentSongs.splice(optionTwo-1,1)
+         }
+         }
         
-       
-
-    }
-    const fight=()=>{
-        let len;
-       
-        if(round===0){
-           
-            len=allSongs.length
-           
-            let optionOne;
-            let optionTwo;
-            if(len===2){
-                optionOne = 0
-                optionTwo = 1
-            }else{
-                optionOne = Math.floor(Math.random() * len)
-                optionTwo = Math.floor(Math.random() * len)
-            while (optionOne === optionTwo ){
-                optionTwo = Math.floor(Math.random() * len)
-            }
-            }
-            
-            firstDiv.innerHTML = videos[videosArray.indexOf(allSongs[optionOne].html)].textContent
-            secondDiv.innerHTML = videos[videosArray.indexOf(allSongs[optionTwo].html)].textContent
-            fightingSongs.push(allSongs[optionOne])
-            fightingSongs.push(allSongs[optionTwo])
-            allSongs.splice(optionOne,1)
-            if (optionOne > optionTwo){
-                allSongs.splice(optionTwo,1)
-            }
-            else{
-                allSongs.splice(optionTwo-1,1)
-            }
-        }
-        else if(round > 0){
-            if(round % 2 === 0){
-            
-            NumberOfSongs = currentSongsSecond.length
-            
-            len = currentSongsSecond.length
-            const optionOne = Math.floor(Math.random() * len)
-            let optionTwo = Math.floor(Math.random() * len)
-            if(NumberOfSongs != 0){
-                while (optionOne === optionTwo ){
-                optionTwo = Math.floor(Math.random() * len)
-            }
-            }
-            firstDiv.innerHTML = videos[videosArray.indexOf(currentSongsSecond[optionOne].html)].textContent
-            secondDiv.innerHTML = videos[videosArray.indexOf(currentSongsSecond[optionTwo].html)].textContent
-            fightingSongs.push(currentSongs[optionOne])
-            fightingSongs.push(currentSongs[optionTwo])
-            if(currentSongsSecond.length!==2){
-                currentSongsSecond.splice(optionOne,1)
-            if (optionOne > optionTwo){
-                currentSongsSecond.splice(optionTwo,1)
-            }
-            else{
-                currentSongsSecond.splice(optionTwo-1,1)
-            }  
-            }
-            }
-            
-            else{
-            NumberOfSongs = currentSongs.length
-            len = currentSongs.length
-            let optionOne;
-            let optionTwo;
-            if(len===2){
-                optionOne = 0
-                optionTwo = 1
-            }else{
-                optionOne = Math.floor(Math.random() * len)
-                optionTwo = Math.floor(Math.random() * len)
-            while (optionOne === optionTwo ){
-                optionTwo = Math.floor(Math.random() * len)
-            }
-            }
-            firstDiv.innerHTML = videos[videosArray.indexOf(currentSongs[optionOne].html)].textContent
-            secondDiv.innerHTML = videos[videosArray.indexOf(currentSongs[optionTwo].html)].textContent
-            fightingSongs.push(currentSongs[optionOne])
-            fightingSongs.push(currentSongs[optionTwo])
-            currentSongs.splice(optionOne,1)
-            if (optionOne > optionTwo){
-                currentSongs.splice(optionTwo,1)
-            }
-            else{
-                currentSongs.splice(optionTwo-1,1)
-            }
-            }
-           
-            
-        }
-        
-      
-        
-        
-    }
-    const show_winner=(winner, second)=>{
-        firstOption.innerHTML=""
-        secondOption.innerHTML=""
-        firstButton.classList.add('hidden')
-        secondButton.classList.add('hidden')
-        
-
-       
-        const form = document.createElement('form')
-        form.method="POST"
-        form.action="give_points"
-      
-        form.innerHTML= `
-        {% csrf_token %}
-        <input name="winner_game" id="winner_game" value='${winner}'>
-        <input name="second_game" id="second_game" value='${second}'>
-        <input type="submit" value="CONFIRM"></input> `
-      
-        const main = document.querySelector('main')
-        main.appendChild(form)
-    }
-    const get_choice=(e)=>{
-
-        NumberOfSongs-=2
-        numberOfRounds-=1
-       
-        if(numberOfRounds===1){
-           
-            
-            if(round%2===0){
-                let result;
-                if(e.target.textContent==='Option 1'){
-                    result = firstDiv.innerHTML
-                 }else{
-                    result = secondDiv.innerHTML
-                }
-                
-                if(result.toString() === currentSongsSecond[0].html){
-                        return show_winner(currentSongsSecond[0].title,currentSongsSecond[1].title) 
-                    }else if(result.toString() === currentSongsSecond[1].html){
-                        return show_winner(currentSongsSecond[1].title,currentSongsSecond[0].title) 
-                    }
-                
-            }
-            else{
-                let result;
-                if(e.target.textContent==='Option 1'){
-                    result = firstDiv.innerHTML
-                 }else{
-                    result = secondDiv.innerHTML
-                }
-                if(result.toString() === currentSongs[0].html){
-                        return show_winner(currentSongs[0].title, currentSongs[1].title)
-                    }else if(result.toString() === currentSongs[1].html){
-                        return show_winner(currentSongs[1].title, currentSongs[0].title)
-                    } 
-
-            }
-            
-        }
-        
-        const result = e.target.textContent
-        if(result === 'Option 1'){
-           
-            if(round ===0 || round%2===0){
-          
-                currentSongs.push(fightingSongs[0])
-            }else{
-              
-
-                currentSongsSecond.push(fightingSongs[0])
-            }
-            
-        }
-        else{
+         
+     }
      
-            if(round ===0 || round%2===0){
-               
+   
+     
+     
+ }
+ const show_winner=(winner, second)=>{
+     firstOption.innerHTML=""
+     secondOption.innerHTML=""
+     firstButton.classList.add('hidden')
+     secondButton.classList.add('hidden')
+     
 
-                currentSongs.push(fightingSongs[1])
-            }else{
-               
+    
+     const form = document.createElement('form')
+     form.method="POST"
+     form.action="give_points"
+   
+     form.innerHTML= `
+     {% csrf_token %}
+     <input name="winner_game" id="winner_game" value='${winner}'>
+     <input name="second_game" id="second_game" value='${second}'>
+     <input type="submit" value="CONFIRM"></input> `
+   
+     const main = document.querySelector('main')
+     main.appendChild(form)
+ }
+ const get_choice=(e)=>{
 
-                currentSongsSecond.push(fightingSongs[1])
+     NumberOfSongs-=2
+     numberOfRounds-=1
+    
+     
+     
+     const result = e.target.textContent
+     if(result === 'Option 1'){
+        
+         if(round ===0 || round%2===0){
+       
+             currentSongs.push(fightingSongs[0])
+         }else{
+           
+
+             currentSongsSecond.push(fightingSongs[0])
+         }
+         
+     }
+     else{
+  
+         if(round ===0 || round%2===0){
+            
+
+             currentSongs.push(fightingSongs[1])
+         }else{
+            
+
+             currentSongsSecond.push(fightingSongs[1])
+         }
+     }
+     if(numberOfRounds===1){
+        
+         
+        if(round%2===0){
+            let result;
+            if(e.target.textContent==='Option 1'){
+                result = firstDiv.innerHTML
+             }else{
+                result = secondDiv.innerHTML
             }
+            
+            if(result.toString() === currentSongsSecond[0].html){
+                    return show_winner(currentSongsSecond[0].title,currentSongsSecond[1].title) 
+                }else if(result.toString() === currentSongsSecond[1].html){
+                    return show_winner(currentSongsSecond[1].title,currentSongsSecond[0].title) 
+                }
+            
         }
-        if(NumberOfSongs===0){
-            round= round + 1
+        else{
+           console.log(numberOfRounds)
+           console.log(round)
+           
+            let result;
+            if(e.target.textContent==='Option 1'){
+                result = firstDiv.innerHTML
+             }else{
+                result = secondDiv.innerHTML
+            }
+            if(result.toString() === fightingSongs[0].html){
+                    return show_winner(fightingSongs[0].title, fightingSongs[1].title)
+                }else if(result.toString() === fightingSongs[1].html){
+                    return show_winner(fightingSongs[1].title, fightingSongs[0].title)
+                } 
+
         }
-        fightingSongs.length = 0
-        fight()
         
     }
-    
-    firstButton.addEventListener("click",get_choice)
-    secondButton.addEventListener("click",get_choice)
-    start_game()
+     if(NumberOfSongs===0){
+         round= round + 1
+     }
+     fightingSongs.length = 0
+     fight()
+     
+ }
+ 
+ firstButton.addEventListener("click",get_choice)
+ secondButton.addEventListener("click",get_choice)
+ start_game()
 
 
 
-    
+ 
 
-    
+ 
 </script>
 </body>
