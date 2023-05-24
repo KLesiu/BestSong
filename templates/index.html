@@ -8,82 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;700&display=swap" rel="stylesheet">
     <title>BestSong</title>
-    <style>
-        body{
-            background: rgb(2,0,36);
-            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(5,5,89,1) 35%, rgba(1,2,14,1) 100%);
-            box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            font-family: 'Wix Madefor Display', sans-serif;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-            width:99vw;
-        }
-        h1{
-            color: rgba(255, 255, 255, 0.774);
-            font-size: 50px;
-            text-align: center;
-            width: 100%;
-            
-        }
-        main{
-            align-items: center;
-            background: none;
-            display: flex;
-            justify-content: center;
-            height: 60vh;
-            width: 50%;
-
-        }
-        main a{
-            height: 15%;
-            width: 15%;
-        }
-        main button{
-            background-color: red;
-            border: 0;
-            border-radius: 10px;
-            cursor: pointer;
-            color: white;
-            font-size: 30px;
-            font-weight: 700;
-            height: 100%;
-            width: 100%;
-
-        }
-        main button:hover{
-            background-color: green;
-
-        }
-        aside{
-            align-items: flex-start;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 50%;
-        }
-        aside h2{
-            color: green;
-            font-size: 45px;
-            text-align: center;
-            height: 10%;
-            width: 100%;
-        }
-        aside ol{
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-        aside ol>li{
-            color: rgba(255, 255, 255, 0.808);
-            font-size: 25px;
-            
-            margin-top: 5%;
-        }
-    </style>
+    <link rel="stylesheet" href="static/css/style.css">
    
 </head>
 
@@ -103,61 +28,9 @@
           {% endfor %}
         </ol>
     </aside>
-    
-<script>
-  const li = document.querySelectorAll('li')
-  const titles = document.querySelectorAll('.title')
-  const scores = document.querySelectorAll('.score')
-  const ranking = document.querySelector('#ranking')
-  
-  const arr = Object.values(li)
-  let array = []
-  
-  
-  for (let index = 0; index < arr.length; index++) {
-    array.push(arr[index].children)
-    
-  }
- const generate_new_list = (arr)=>{
-
-    ranking.innerHTML= ""
-    const h2 = document.createElement('h2')
-    h2.textContent= "Ranking"
-    ranking.appendChild(h2)
-    for (let index = 0; index < arr.length; index++) {
-        
-        const li = document.createElement('li')
-        const score = document.createElement('span')
-        const title = document.createElement('span')
-        const space= document.createElement('span')
-        score.classList.add('score')
-        title.classList.add('title')
-        space.textContent=" : "
-        score.textContent=arr[arr.length-1-index][1].textContent
-        title.textContent=arr[arr.length-1-index][0].textContent
-        li.appendChild(title)
-        li.appendChild(space)
-        li.appendChild(score)
-        ranking.append(li)
-        
-    }
- }
- const newList = array.sort((a,b)=>{
-   return parseInt(a[1].textContent) - parseInt(b[1].textContent)
-  })
-generate_new_list(newList)
-  
-  
-    
-        
-    
-    
-    
-    
-    
-    
-    
-</script>    
+   {% load static %} 
+<script type="text/javascript" src="{% static 'js/start.js' %}"></script>
+   
 </body>
 
 </html>
