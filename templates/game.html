@@ -186,6 +186,12 @@
              currentSongsSecond.splice(optionTwo-1,1)
          }  
          }
+         if(NumberOfSongs===2){
+            console.log(round)
+            console.log(currentSongsSecond)
+            console.log(currentSongs)
+            currentSongsSecond.length= 0
+         }
          }
          
          else{
@@ -207,8 +213,7 @@
              }
         
          }
-         console.log(optionOne)
-         console.log(optionTwo)
+      
          firstDiv.innerHTML = videos[videosArray.indexOf(currentSongs[optionOne].html)].textContent
          secondDiv.innerHTML = videos[videosArray.indexOf(currentSongs[optionTwo].html)].textContent
          fightingSongs.push(currentSongs[optionOne])
@@ -220,12 +225,19 @@
          else{
              currentSongs.splice(optionTwo-1,1)
          }
+         if (NumberOfSongs===2){
+            console.log(round)
+            console.log(currentSongs)
+            console.log(currentSongsSecond)
+            currentSongs.length = 0
          }
+         }
+         
         
          
      }
      
-   
+     
      
      
  }
@@ -252,7 +264,7 @@
  }
  const get_choice=(e)=>{
 
-     NumberOfSongs-=2
+    NumberOfSongs-=2
      numberOfRounds-=1
     
      
@@ -293,16 +305,15 @@
                 result = secondDiv.innerHTML
             }
             
-            if(result.toString() === currentSongsSecond[0].html){
-                    return show_winner(currentSongsSecond[0].title,currentSongsSecond[1].title) 
-                }else if(result.toString() === currentSongsSecond[1].html){
-                    return show_winner(currentSongsSecond[1].title,currentSongsSecond[0].title) 
+            if(result.toString() === fightingSongs[0].html){
+                    return show_winner(fightingSongs[0].title, fightingSongs[1].title) 
+                }else if(result.toString() === fightingSongs[1].html){
+                    return show_winner(fightingSongs[1].title, fightingSongs[0].title) 
                 }
             
         }
         else{
-           console.log(numberOfRounds)
-           console.log(round)
+       
            
             let result;
             if(e.target.textContent==='Option 1'){
@@ -323,6 +334,9 @@
          round= round + 1
      }
      fightingSongs.length = 0
+     console.log(round)
+     console.log(currentSongs)
+     console.log(currentSongsSecond)
      fight()
      
  }
